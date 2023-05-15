@@ -1,54 +1,36 @@
-# MPI Lab Assignment 5
+# Vector-Vector Multiplication
 
-This repo contains solutions to the 4 given questions, just run the commands from rootdir to compile and get results. (Scripts only for X86_64)
-This folder contains solutions to the 4 given problems. To check the solutions, just run the bash commands. (NOTE: These scripts are only for X86_64)
+This repo contains the code for vector vector multiplication using pyspark. The program implements vector-vector multiplication using two input vectors given in two separate files. The program consists of two functions: mapper and reducer function. just run the commands from rootdir.
 
-### Program 1 : Factorial of a number:
+### Requirements
+- PySpark 3.4.0
+- Jupyter notebook --6.5.4
 
-In this program, we take the user input 'n' for the factorial of the number to be found. The value of 'n' is sent to the factorial function. The factorial of the 'n' is computed using stacks. 
-Example: If the user inputs n=4, then 4 is pushed into the stack, similarly 3,2,1 are pushed into the stack. When n=0, we start computing. Now, the top most number in the stack is 0. f(0) returns 1 and points to f(1), similarly, this way we can compute f(2), f(3), f(4) as 1*2*3*4 and we return this value.
 
-  ```bash
-  cd 1
-  bash script1.sh
-  ```
----
 
-<br/>
-
-### Program 2 : [F(n)= F(n-1) + n, where n>=2 and F(1)=1]:
-
-In this program, we take the user input 'n' for the function. The value of 'n' is sent to the function and the function is computed using stacks. The concept is similar to Program 1, except instead of multiplying the values here, we add them.
+### Running the code
+Download the zip folder and unzip it. The folder consists of three files: VectorVectorMultiplication.ipynb, vector1.txt, and vector2.txt. Follow the commands given below to run the code. 
 
   ```bash
-  cd 2
-  bash script2.sh
+  cd Team26
+  pipenv shell
+  jupyter notebook
   ```
+Open the VectorVectorMultiplication.ipynb file once the browser window for Jupyter is opened.
+
+---
+### Implementation Details
+- In the code, rdd1 and rdd2 read the two input vectors from text files: vector1.txt and vector2.txt using sc.textFile().
+- The mapper function zips the vector with its respective index using zipWithIndex() and then maps each element using key-value pair where index is the key and value is value.
+- After this step, the two vectors are combined using join and then parallelized.
+- This is converted to index_prod_pairs by mapping the product of the two vectors with indexes. 
+- The reducer function then maps only the values and then sums all the values.
+- The final sum is displayed.
+
 ---
 
-<br/>
+### Team members:
+#### Mrinmoy Kumar Das, SE20UCSE101
+#### Nitya Varshini Gaddala, SE20UCSE117
+#### Rohan Potta, SE20UCSE145
 
-### Program 3 : Sum of all elements in an array:
-
-In this program, we take the user input 'n' for number of element to be present in the array. Then, the user input is taken to fill the array with 'n' inputs. The value of 'n' and the array are sent into arraysum function. The function is computed using stacks and the concept used is similar to Program2, except, here we use an array. 
-
-  ```bash
-  cd 3
-  bash script3.sh
-  ```
----
-
-<br/>
-
-### Program 4 : Smallest element in an array:
-
-In this program, we take the user input 'n' for number of element to be present in the array. Then, the user input is taken to fill the array with 'n' inputs. The value of 'n' and the array are sent into smallestelement function. The function is computed using stacks. Here, after comparing two elements, swapping is done to find the minimum or smallest element in the array.
-
-  ```bash
-  cd 4
-  bash script4.sh
-  ```
----
-
-<br/>
-<br/>
